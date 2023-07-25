@@ -16,7 +16,7 @@ class RenderService {
 		const element = template.content.firstChild;
 	    // console.log(element);
 
-		//styles
+		if (styles) this.#applyModuleStyles(styles, element)
 
 	    this.#replaceComponentTags(element, components);
 
@@ -30,7 +30,7 @@ class RenderService {
 
 	#replaceComponentTags(parentElement, components) {
 		const componentTagPattern = /^component-/;     // ^ - начало строки
-		const allElements = parentElement.getElementsByTagName('*');
+		const allElements = parentElement.getElementsByTagName('*')
 
 		for (const element of allElements) {
 			const elementTagName = element.tagName.toLowerCase();
@@ -62,6 +62,29 @@ class RenderService {
 		}
 	}
 
+	/**
+	 * @param {Object} moduleStyles
+	 * @param {string} element
+	 * @returns {void}
+	 */
+
+	#applyModuleStyles(moduleStyles, element){
+		if(!element) return;
+
+		const applyStyles = (element) => {
+			for (const [key, value] of Object.entries(moduleStyles)) {
+				if (element.classList.contains(key)) {  // ищем класс
+					element.classList.remove(key);
+					element.classList.add(value);       // переопределяем класс
+				}
+			}
+		}
+
+		if (element.getAttribute('class')) applyStyles(element);
+
+		const elements = element.querySelectorAll('*'); // находим все элементы
+		elements.forEach(applyStyles);
+	}
 
 }
 
