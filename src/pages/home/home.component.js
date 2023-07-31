@@ -5,13 +5,15 @@ import styles from "./home.module.scss";
 import {$B} from "@/libs/bquery.lib";
 
 export class Home extends BaseScreen {
-    constructor() {
-        super({title: 'Home'});
-    };
+	constructor() {
+		super({ title: 'Home' })
+	}
 
-    render() {
-        const element = RenderService.htmlToElement(template, [], styles);
-		$B(element).find('h1').css('color', 'red');
-        return element.outerHTML;
-    }
+	render() {
+		const element = RenderService.htmlToElement(template, [], styles)
+
+		$B(element).find('h1').css('color', 'green')
+
+		return element;
+	}
 }

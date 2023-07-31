@@ -1,6 +1,7 @@
 import { ROUTES } from '@/router/routes.data'
 import { NotFound } from '@/pages/not-found/not-found.component'
 import {Layout} from "@/components/Layout/layout.component";
+import {$B} from "@/libs/bquery.lib";
 
 export class Router {
 	#routes = ROUTES;
@@ -51,16 +52,17 @@ export class Router {
 	}
 
 	#render() {
-		const component = new this.#currentRoute.component;
+		const component = new this.#currentRoute.component().render()
 
         if (!this.#layout) {
             this.#layout = new Layout({
                 router: this,
-                children: component.render()
-            })
-            document.getElementById('app').innerHTML = this.#layout.render();
+                children: component
+            }).render();
+
+	        $B('#app').append(this.#layout);
         } else {
-            document.querySelector('main').innerHTML = component.render();
+	        $B('#content').html('').append(component);
         }
 	}
 }
