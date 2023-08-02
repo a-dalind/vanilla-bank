@@ -1,0 +1,25 @@
+@import 'src/styles/variables';
+
+.logo {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	border-bottom: none;
+
+	&:hover {
+		border-bottom: none;
+
+		span {
+			text-decoration: underline;
+		}
+	}
+
+	span {
+		display: block;
+		font-family: "Arial", sans-serif;
+		font-size: 22px;
+		font-weight: 600;
+		line-height: 120%;
+		margin-left: 16px;
+	}
+}

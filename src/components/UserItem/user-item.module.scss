@@ -11,14 +11,16 @@
 	line-height: 120%;
 	color: white;
 	background-color: transparent;
-	border: 1px solid $red;
+	border: 2px solid $red;
 	border-radius: 8px;
 	padding: 8px 16px;
 	transition: 0.3s ease-in-out;
 
 	&:disabled {
 		background-color: rgba($text-gray, 0.5);
-		border: 1px solid $text-gray;
+		border: 2px solid $text-gray;
+		color: rgba($white, 0.5);
+		cursor: default;
 	}
 
 	&:not(:disabled) {
@@ -36,7 +38,7 @@
 	}
 
 	&.gold {
-		border: 1px solid $gold;
+		border: 2px solid $gold;
 
 		&:not(:disabled) {
 			&:hover {

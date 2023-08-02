@@ -41,7 +41,7 @@ class BQuery {
 	 */
 	append(childElement) {
 		this.element.appendChild(childElement);
-		return this;           // возвращаем this, чтобы можно было продолжить строчку
+		return this;        // возвращаем this, чтобы можно было продолжить строчку
 	}
 
 	/**

@@ -2,8 +2,9 @@ import RenderService from "@/services/render.service";
 import template from "./layout.template.html";
 import styles from "./layout.module.scss";
 import ChildComponent from "@/components/Child/child.component";
-import {Header} from "@/components/Layout/header/header.component";
 import {$B} from "@/libs/bquery.lib";
+import {Header} from "@/components/Header/header.component";
+import {Heading} from "@/components/Heading/heading.component";
 
 export class Layout extends ChildComponent {
 	constructor({ router, children }) {
@@ -21,7 +22,12 @@ export class Layout extends ChildComponent {
 		const contentContainer = $B(this.element).find('#content');
 		contentContainer.append(this.children);
 
-		mainElement.before(new Header().render()).append(contentContainer.element);
+		mainElement
+			.before(new Header({
+				router: this.router
+			})
+			.render())
+			.append(contentContainer.element);
 
 		return this.element
 	}

@@ -2,6 +2,9 @@
 
 .input {
 	input {
+		font-family: "Arial", sans-serif;
+		font-size: 16px;
+		line-height: 120%;
 		outline: none;
 		background-color: $gray;
 		color: $black;
@@ -17,7 +20,7 @@
 		input {
 			background-color: transparent;
 			color: $white;
-			border: 1px solid $red;
+			border: 2px solid $red;
 		}
 	}
 }

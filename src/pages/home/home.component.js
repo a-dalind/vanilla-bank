@@ -25,10 +25,6 @@ export class Home extends BaseScreen {
 				name: 'test-input',
 				variant: 'red'
 			}),
-			new UserItem({
-				avatarPath: 'https://icons.iconarchive.com/icons/iconarchive/incognito-animals/512/Bear-Avatar-icon.png',
-				name: 'Name Surname'
-			})
 		], styles)
 
 		$B(element).find('h1').css('color', 'green')

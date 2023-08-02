@@ -54,15 +54,15 @@ export class Router {
 	#render() {
 		const component = new this.#currentRoute.component().render()
 
-        if (!this.#layout) {
-            this.#layout = new Layout({
-                router: this,
-                children: component
-            }).render();
+		if (!this.#layout) {
+			this.#layout = new Layout({
+				router: this,
+				children: component
+			}).render()
 
-	        $B('#app').append(this.#layout);
-        } else {
-	        $B('#content').html('').append(component);
-        }
+			$B('#app').append(this.#layout);
+		} else {
+			$B('#content').html('').append(component);
+		}
 	}
 }
