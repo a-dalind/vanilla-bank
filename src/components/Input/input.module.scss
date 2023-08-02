@@ -1,0 +1,23 @@
+@import 'src/styles/variables';
+
+.input {
+	input {
+		outline: none;
+		background-color: $gray;
+		color: $black;
+		border-radius: 8px;
+		padding: 8px 16px;
+
+		&:hover {
+			outline: none;
+		}
+	}
+
+	&.red {
+		input {
+			background-color: transparent;
+			color: $white;
+			border: 1px solid $red;
+		}
+	}
+}

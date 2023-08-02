@@ -1,3 +1,5 @@
+import {formatCardNumberWithDashes} from "@/utils/format-number-with-dashes";
+
 class BQuery {
 	/**
 	 * Create a new BQuery instance.
@@ -76,6 +78,82 @@ class BQuery {
 		}
 	}
 
+
+
+	/**
+	 * Attach a click event listener to the selected element.
+	 * @param {function(Event): void} callback - The event listener function to execute when the selected element is clicked. The function will receive the event object as its argument.
+	 * @returns BQuery{RQuery} The current RQuery instance for chaining.
+	 */
+
+	click(callback) {
+		this.element.addEventListener('click', callback);
+		return this;
+	}
+
+
+
+	/**
+	 * Set attributes and event listeners for an input element.
+	 * @param {object} options - An object containing input options.
+	 * @param {function(Event): void} [options.onInput] - The event listener for the input's input event.
+	 * @param {object} [options.rest] - Optional attributes to set on the input element.
+	 * @returns {BQuery} The current RQuery instance for chaining.
+	 */
+
+	input({onInput, ...rest}) {
+		if (this.element.tagName.toLowerCase() !== 'input') throw new Error('Element must be an input!');
+
+		for (const [key, value] of Object.entries(rest)) {
+			this.element.setAttribute(key, value);
+		}
+
+		if (onInput) this.element.addEventListener('input', onInput);
+
+		return this;
+	}
+
+
+	/**
+	 * Set attributes and event listeners for a number input element.
+	 * @param {number} [limit] - The maximum length of input value.
+	 * @returns {BQuery} The current RQuery instance for chaining.
+	 */
+
+	numberInput(limit) {
+		if (this.element.tagName.toLowerCase() !== 'input' || this.element.type !== 'number') throw new Error('Element must be an input with type "number"!');
+
+		this.element.addEventListener('input', (event) => {
+			let value = event.target.value.replace(/[^0-9]/g, '');
+			if (limit) value = value.substring(0, limit);
+			event.target.value = value;
+		});
+
+
+		return this;
+	}
+
+	/**
+	 * Set attributes and event listeners for a credit card input element.
+	 * @returns {BQuery} The current RQuery instance for chaining.
+	 */
+	creditCardInput() {
+		const limit = 16;
+
+		if (this.element.tagName.toLowerCase() !== 'input' || this.element.type !== 'text') throw new Error('Element must be an input with type "text"!');
+
+		this.element.addEventListener('input', (event) => {
+			let value = event.target.value.replace(/[^0-9]/g, '');
+			if (limit) value = value.substring(0, limit);
+			event.target.value = formatCardNumberWithDashes(value);
+		});
+
+
+		return this;
+	}
+
+
+
 	/**
 	 * Set the CSS style of the selected element.
 	 * @param {string} property - The CSS property to set.
@@ -88,6 +166,43 @@ class BQuery {
 		}
 
 		this.element.style[property] = value;
+		return this;
+	}
+
+
+	/**
+	 * Adds a class or a list of classes to the current element.
+	 * @param {string | string[]} classNames - A single class name or an array of class names to add to the element.
+	 * @returns {BQuery} The current RQuery instance for chaining.
+	 */
+
+	addClass(classNames) {
+		if (Array.isArray(classNames)) {
+			for (const className of classNames) {
+				this.element.classList.add(className);
+			}
+		} else {
+			this.element.classList.add(classNames);
+		}
+
+		return this;
+	}
+
+	/**
+	 * Removes a class or a list of classes from the current element.
+	 * @param {string | string[]} classNames - A single class name or an array of class names to remove from the element.
+	 * @returns {BQuery} The current RQuery instance for chaining.
+	 */
+
+	removeClass(classNames) {
+		if (Array.isArray(classNames)) {
+			for (const className of classNames) {
+				this.element.classList.remove(className);
+			}
+		} else {
+			this.element.classList.remove(classNames);
+		}
+
 		return this;
 	}
 }
