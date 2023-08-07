@@ -1,23 +1,16 @@
-import styles from '@/components/layout/notification/notification.module.scss'
+import {$B} from "@/libs/bquery.lib";
+import styles from "@/components/Notification/notification.module.scss";
 
-import { $R } from '../rquery/rquery.lib'
-
-/**
- * NotificationService is a utility class to handle displaying notifications.
- * It can be used to display messages with different types (success, error) and manage the notification timeout.
- */
 export class NotificationService {
-	#timeout
+	#timeout;
 
 	constructor() {
-		this.#timeout = null
+		this.#timeout = null;
 	}
 
 	#setTimeout(callback, duration) {
-		if (this.#timeout) {
-			clearTimeout(this.#timeout)
-		}
-		this.#timeout = setTimeout(callback, duration)
+		if (this.#timeout) clearTimeout(this.#timeout);
+		this.#timeout = setTimeout(callback, duration);
 	}
 
 	/**
@@ -38,13 +31,13 @@ export class NotificationService {
 			error: styles.error
 		}
 
-		const notificationElement = $R('#notification')
-		const className = classNames[type]
+		const notificationElement = $B('#notification');
+		const className = classNames[type];
 
-		notificationElement.text(message).addClass(className)
+		notificationElement.text(message).addClass(className);
 
 		this.#setTimeout(() => {
-			notificationElement.removeClass(className)
-		}, 3000)
+			notificationElement.removeClass(className);
+		}, 3000);
 	}
 }

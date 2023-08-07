@@ -4,13 +4,14 @@
 	position: fixed;
 	top: 3rem;
 	right: 3rem;
-	background-color: rgb(255 74 74);
-	border-radius: $radius;
-	padding: 0.7rem 1.4rem;
+	display: none;
+	color: $white;
+	background-color: $primary;
+	border-radius: 8px;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 	cursor: default;
 	z-index: 5;
-	display: none;
+	padding: 16px;
 	animation: slideIn 1s;
 
 	&.error,
@@ -19,7 +20,11 @@
 	}
 
 	&.success {
-		background-color: #2e8677;
+		background-color: $blue;
+	}
+
+	&.error {
+		background-color: $red;
 	}
 }
 

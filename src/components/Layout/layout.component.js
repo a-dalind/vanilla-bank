@@ -4,7 +4,7 @@ import styles from "./layout.module.scss";
 import ChildComponent from "@/components/Child/child.component";
 import {$B} from "@/libs/bquery.lib";
 import {Header} from "@/components/Header/header.component";
-import {Heading} from "@/components/Heading/heading.component";
+import {Notification} from "@/components/Notification/notification.component";
 
 export class Layout extends ChildComponent {
 	constructor({ router, children }) {
@@ -15,7 +15,7 @@ export class Layout extends ChildComponent {
 	}
 
 	render() {
-		this.element = RenderService.htmlToElement(template, [], styles);
+		this.element = RenderService.htmlToElement(template, [Notification], styles);
 
 		const mainElement = $B(this.element).find('main');
 
