@@ -1,4 +1,8 @@
 import {getErrorMessage} from "@/libs/bank-query/get-error-message";
+import {StorageService} from "@/services/storage.service";
+import {ACCESS_TOKEN_KEY} from "@/constants/auth.constants";
+import {SERVER_URL} from "@/config/url.config";
+import {NotificationService} from "@/services/notification.service";
 
 /**
  * BankQuery is a minimalistic library for handling API requests.
@@ -13,7 +17,7 @@ import {getErrorMessage} from "@/libs/bank-query/get-error-message";
  * @param {Function} [options.onError=null] - Callback function to be called on error response.
  * @returns {Promise<{isLoading: boolean, error: string|null, data: any|null}>} - An object containing the loading state, error, and data from the response.
  */
-export async function redQuery({
+export async function bankQuery({
    path,
    body = null,
    headers = {},
@@ -26,7 +30,7 @@ export async function redQuery({
 	let data = null;
 	const url = `${SERVER_URL}/api${path}`;
 
-	const accessToken = '';
+	const accessToken = new StorageService().getItem(ACCESS_TOKEN_KEY);
 
 	const requestOptions = {
 		method,
@@ -51,10 +55,13 @@ export async function redQuery({
 			const errorData = await response.json();
 			const errorMessage = getErrorMessage(errorData);
 			if (onError) onError(errorMessage);
+
+			new NotificationService().show('error', errorMessage);
 		}
 	} catch (errorData) {
 		const errorMessage = getErrorMessage(errorData);
 		if (onError) onError(errorMessage);
+		new NotificationService().show('error', errorMessage);
 	} finally {
 		isLoading = false;
 	}
