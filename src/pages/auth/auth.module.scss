@@ -1,0 +1,53 @@
+@import 'src/styles/variables';
+
+.auth {
+	form {
+		display: grid;
+		grid-template-columns: 1fr;
+		background-color: $black;
+		border-radius: 8px;
+		padding: 32px;
+		width: 50%;
+		margin: 0 auto;
+		margin-top: 3rem;
+	}
+
+	h1 {
+		display: block;
+		font-family: "Arial", sans-serif;
+		font-weight: 600;
+		font-size: 24px;
+		line-height: 120%;
+		color: white;
+		margin-bottom: 24px;
+	}
+
+	&__inputs {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 16px;
+		margin-bottom: 24px;
+
+		input {
+			width: 100%;
+		}
+	}
+
+	&__submit-btn {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 24px;
+	}
+
+	&__change-type {
+		display: flex;
+		justify-content: flex-end;
+		font-family: "Arial", sans-serif;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 120%;
+		color: $primary;
+		background-color: transparent;
+		border: none;
+	}
+}

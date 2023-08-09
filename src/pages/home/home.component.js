@@ -19,12 +19,6 @@ export class Home extends BaseScreen {
 				onClick: () => alert('123123'),
 				variant: 'red'
 			}),
-			new Input({
-				placeholder: 'placeholder',
-				value: '',
-				name: 'test-input',
-				variant: 'red'
-			}),
 		], styles)
 
 		$B(element).find('h1').css('color', 'green')

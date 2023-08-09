@@ -79,6 +79,24 @@ class BQuery {
 	}
 
 
+	/**
+	 * Set an event listener for the submit event of a form element.
+	 * @param {function(Event): void} onSubmit - The event listener for the form's submit event.
+	 * @returns {BQuery} The current RQuery instance for chaining.
+	 */
+	submit(onSubmit) {
+		if (this.element.tagName.toLowerCase() === 'form') {
+			this.element.addEventListener('submit', e => {
+				e.preventDefault();
+				onSubmit(e);
+			})
+		} else {
+			throw new Error('Element must be a form');
+		}
+
+		return this;
+	}
+
 
 	/**
 	 * Attach a click event listener to the selected element.
