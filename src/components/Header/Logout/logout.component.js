@@ -3,10 +3,14 @@ import template from './logout.template.html'
 import {$B} from "@/libs/bquery.lib";
 import ChildComponent from "@/components/Child/child.component";
 import renderService from "@/services/render.service";
+import {Store} from "@/store/store";
 
 export class Logout extends ChildComponent {
 	constructor({ router }) {
 		super();
+
+		this.store = Store.getInstance();
+		this.user = this.store.state.user
 
 		this.router = router;
 	}
@@ -16,7 +20,10 @@ export class Logout extends ChildComponent {
 
 		$B(this.element)
 			.find('button')
-			.click(() => {this.router.navigate('/auth')});
+			.click(() => {
+				this.store.logout();
+				this.router.navigate('/auth');
+			});
 
 		return this.element;
 	}

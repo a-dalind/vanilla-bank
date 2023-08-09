@@ -6,13 +6,32 @@ import {SearchInput} from "@/components/Header/SearchInput/search-input.componen
 import {UserItem} from "@/components/UserItem/user-item.component";
 import {Logout} from "@/components/Header/Logout/logout.component";
 import {Logo} from "@/components/Header/Logo/logo.component";
+import {Store} from "@/store/store";
+import {$B} from "@/libs/bquery.lib";
 
 export class Header extends ChildComponent {
 	constructor({ router }) {
-		super()
+		super();
+
+		this.store = Store.getInstance();
+		this.store.addObserver(this);
 
 		this.router = router
 	}
+
+	update() {
+		this.user = this.store.state.user;
+
+		const authSideElement = $B(this.element).find('#auth-side');
+
+		if (this.user) {
+			authSideElement.show();
+			this.router.navigate('/');
+		} else {
+			authSideElement.hide();
+		}
+	}
+
 	render() {
 		this.element = RenderService.htmlToElement(template, [
 			Logo,
@@ -26,7 +45,9 @@ export class Header extends ChildComponent {
 			}),
 		], styles)
 
-		return this.element
+		this.update();
+
+		return this.element;
 	}
 }
 

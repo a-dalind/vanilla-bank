@@ -18,8 +18,8 @@ export class Auth extends BaseScreen {
     };
 
 	#validateFields(formValues) {
-		const emailLabel = $B(this.element).find('label:first-child')
-		const passwordLabel = $B(this.element).find('label:last-child')
+		const emailLabel = $B(this.element).find('label:first-child');
+		const passwordLabel = $B(this.element).find('label:last-child');
 
 		if (!formValues.email) validationService.showError(emailLabel);
 
@@ -29,10 +29,11 @@ export class Auth extends BaseScreen {
 	}
 
 	#handleSubmit = event => {
-		console.log('567')
 		const formValues = formService.getFormValues(event.target);
-		console.log(formValues)
 		if (!this.#validateFields(formValues)) return;
+
+		const type = this.#isTypeLogin ? 'login' : 'register';
+		this.authService.main(type, formValues);
 	}
 
 	#changeAuthType = (evt) => {
@@ -60,7 +61,6 @@ export class Auth extends BaseScreen {
 					placeholder: 'Enter email',
 					name: 'email',
 					type: 'email',
-					// variant: 'accent-secondary'
 				}).render()
 			)
 			.append(

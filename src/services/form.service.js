@@ -8,7 +8,6 @@ class FormService {
 
 	getFormValues(formElement) {
 		const inputs = formElement.querySelectorAll('input');
-		console.log(inputs)
 		const values = {};
 
 		for (const input of inputs) {

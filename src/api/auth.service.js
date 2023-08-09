@@ -17,7 +17,7 @@ export class AuthService {
 			body,
 			onSuccess: data => {
 				this.store.login(data.user, data.accessToken);
-				this.notificationService().show('success', 'You are successfully authorized!')
+				this.notificationService.show('success', 'You are successfully authorized!')
 			},
 		})
 	}

@@ -6,11 +6,12 @@
 		font-size: 16px;
 		line-height: 120%;
 		outline: none;
-		background-color: rgba($primary, 0.6);
-		border: 2px solid rgba($primary, 0.6);
 		color: $white;
+		background-color: transparent;
+		border: none;
 		border-radius: 8px;
 		min-height: 46px;
+		width: 100%;
 		padding: 8px 16px;
 
 		&:hover {
@@ -20,12 +21,36 @@
 		&::placeholder {
 			color: rgba($white, 0.6);
 		}
+
+		&:-webkit-autofill,
+		&:-webkit-autofill:hover,
+		&:-webkit-autofill:focus {
+			-webkit-box-shadow: 0 0 0 30px $primary inset !important;
+			-webkit-text-fill-color: $white !important;
+		}
+	}
+
+	label {
+		display: block;
+		background-color: rgba($primary, 0.6);
+		outline: 2px solid transparent;
+		border-radius: 8px;
+		min-height: 46px;
+		//padding: 8px 16px;
 	}
 
 	&.accent-secondary {
 		input {
+			&:-webkit-autofill,
+			&:-webkit-autofill:hover,
+			&:-webkit-autofill:focus {
+				-webkit-box-shadow: 0 0 0 30px $secondary inset !important;
+				-webkit-text-fill-color: $white !important;
+			}
+		}
+
+		label {
 			background-color: rgba($secondary, 0.6);
-			border: 2px solid rgba($secondary, 0.6);
 		}
 	}
 }
