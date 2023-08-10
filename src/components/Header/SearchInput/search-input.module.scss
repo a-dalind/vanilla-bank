@@ -1,6 +1,8 @@
 @import 'src/styles/variables';
 
 .search-input {
+	position: relative;
+
 	&__input {
 		display: flex;
 		align-items: center;
@@ -8,7 +10,6 @@
 		border-radius: 8px;
 		min-height: 50px;
 		padding: 8px 16px;
-		margin-right: 16px;
 
 		&:focus {
 			outline: none;
@@ -25,5 +26,47 @@
 			font-size: 16px;
 			line-height: 120%;
 		}
+	}
+}
+
+.search-results {
+	position: absolute;
+	top: calc(100% + 0.7rem);
+	right: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 8px;
+	width: 100%;
+	z-index: 3;
+	border-radius: 8px;
+	background-color: $bg-block;
+	animation: showIn 0.4s;
+
+	.item {
+		width: 100%;
+		opacity: 0;
+		transform: translateY(-20px);
+		transition: opacity 0.3s, transform 0.3s;
+
+		&.visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+}
+
+
+@keyframes showIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+
+	70% {
+		opacity: 1;
+	}
+
+	to {
+		transform: translateY(0);
 	}
 }

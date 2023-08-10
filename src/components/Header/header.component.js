@@ -16,7 +16,12 @@ export class Header extends ChildComponent {
 		this.store = Store.getInstance();
 		this.store.addObserver(this);
 
-		this.router = router
+		this.router = router;
+
+		this.userItem = new UserItem({
+			avatarPath: '/',
+			name: 'Name'
+		})
 	}
 
 	update() {
@@ -26,6 +31,7 @@ export class Header extends ChildComponent {
 
 		if (this.user) {
 			authSideElement.show();
+			this.userItem.update(this.user);
 			this.router.navigate('/');
 		} else {
 			authSideElement.hide();
@@ -36,10 +42,7 @@ export class Header extends ChildComponent {
 		this.element = RenderService.htmlToElement(template, [
 			Logo,
 			new SearchInput(),
-			new UserItem({
-				avatarPath: 'https://icons.iconarchive.com/icons/iconarchive/incognito-animals/512/Bear-Avatar-icon.png',
-				name: 'Name Surname'
-			}),
+			this.userItem,
 			new Logout({
 				router: this.router
 			}),
